@@ -3,17 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-scripts": "2.1.1",
-    "webpack": "^4.23.1",
-    "webpack-dev-server": "^3.1.10"
-=======
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2"
->>>>>>> Initial commit from Create React App
   },
   "scripts": {
     "start": "react-scripts start",
