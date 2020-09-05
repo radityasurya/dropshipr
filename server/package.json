@@ -1,0 +1,48 @@
+{
+  "name": "dropshipr-api",
+  "version": "0.0.1",
+  "description": "Dropship management platform",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radityasurya/dropshipr.git"
+  },
+  "keywords": [
+    "dropship"
+  ],
+  "author": "Raditya Surya",
+  "contact": "radityasurya1911@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radityasurya/dropshipr/issues"
+  },
+  "homepage": "https://github.com/radityasurya/dropshipr#readme",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ./src --fix",
+    "test": "mocha --exit --reporter spec \"src/*/*.test.js\"",
+    "dev": "nodemon src/api/index.js -L --exec \"npm run test && npm run lint && node\"",
+    "build": "webpack --config webpack.config.js",
+    "start": "pm2-runtime start src/api/index.js -i max",
+    "stop": "pm2 stop all",
+    "delete": "pm2 delete app"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "eslint": "^7.8.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "express": "^4.16.4",
+    "http-status": "^1.3.1",
+    "joi": "^14.3.1",
+    "mongoose": "^5.4.2",
+    "nodemon": "^1.18.9",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
+  }
+}
