@@ -1,25 +1,32 @@
 {
   "name": "dropshipr",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2"
+  "version": "0.0.1",
+  "description": "Dropship management platform",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radityasurya/dropshipr.git"
   },
+  "keywords": [
+    "dropship"
+  ],
+  "author": "Raditya Surya",
+  "contact": "radityasurya1911@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radityasurya/dropshipr/issues"
+  },
+  "homepage": "https://github.com/radityasurya/dropshipr#readme",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev:client": "npm start --prefix client/",
+    "dev:server": "npm run dev --prefix server/",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "build": "npm run build --prefix client/ && npm run build --prefix server/",
+    "start": "pm2 start build/app.js -i max",
+    "stop": "pm2 stop all",
+    "delete": "pm2 delete app"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
 }
