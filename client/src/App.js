@@ -5,7 +5,8 @@ import "./App.css";
 import EmailList from "./components/EmailList";
 
 const emails = [
-  { id: 1, name: "Raditya" }
+  { id: 1, name: "aku@hotbanget.com" },
+  { id: 2, name: "ayang@hotbanget.com" }
 ];
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Dropshipr</h1>
         </header>
 
         <EmailList emails={emails} />
