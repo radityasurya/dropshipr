@@ -1,27 +1,27 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
-const routes = require('../route')
-const config = require('./config')
+const routes = require('../routes');
+const config = require('./config');
 
-const app = express()
+const app = express();
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors())
+app.use(cors());
 
 // Use middleware to set the default Content-Type
-app.use(function (req, res, next) {
-  res.header('Content-Type', 'application/json')
-  next()
-})
+app.use((req, res, next) => {
+  res.header('Content-Type', 'application/json');
+  next();
+});
 
 app.get('/', (req, res) => res.send(
   JSON.stringify({
     name: 'Dropshipr API',
-    version: config.version
-  })
-))
+    version: config.version,
+  }),
+));
 
-app.use('/api', routes)
+app.use('/api', routes);
 
-module.exports = app
+module.exports = app;

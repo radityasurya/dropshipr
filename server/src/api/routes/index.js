@@ -1,13 +1,11 @@
-const express = require('express')
+const express = require('express');
 
-const router = express.Router() // eslint-disable-line new-cap
+const router = express.Router();
 
 /** GET /healthz - Check service health */
-router.get('/healthz', (req, res) =>
-  res.json({
-    code: res.statusCode,
-    message: 'Healthsy'
-  })
-)
+router.get('/healthz', (req, res) => res.json({
+  code: res.statusCode,
+  message: 'Healthy',
+}));
 
-module.exports = router
+module.exports = router;
