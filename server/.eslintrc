@@ -12,9 +12,9 @@
     "max-len": [
       "warn",
       {
-        "code": "80",
+        "code": 80,
         "tabWidth": 2,
-        "comments": "80",
+        "comments": 80,
         "ignoreComments": false,
         "ignoreTrailingComments": true,
         "ignoreUrls": true,
@@ -27,7 +27,13 @@
     "no-console": "off",
     "no-undef": "off",
     "no-unused-vars": "off",
-    "no-global-assign": "off"
+    "no-global-assign": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   },
   "env": {
     "browser": true,
