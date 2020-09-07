@@ -25,6 +25,7 @@
     ],
     "linebreak-style": ["error", "windows"],
     "no-console": "off",
+    "no-debugger": "off",
     "no-undef": "off",
     "no-unused-vars": "off",
     "no-global-assign": "off",
