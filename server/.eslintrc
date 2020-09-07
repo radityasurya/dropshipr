@@ -5,6 +5,10 @@
     "import"
   ],
   "rules": {
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
     "no-console": "off",
     "no-undef": "off",
     "no-unused-vars": "off",
