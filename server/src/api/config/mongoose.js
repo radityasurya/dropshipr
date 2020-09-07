@@ -10,7 +10,11 @@ const db = mongoose.connection;
 // print mongoose logs in dev env
 if (mongo.debug) {
   mongoose.set('debug', (collectionName, method, query, doc) => {
-    mongo.debug(`${collectionName}.${method}`, mongo.util.inspect(query, false, 20), doc);
+    mongo.debug(
+      `${collectionName}.${method}`,
+      mongo.util.inspect(query, false, 20),
+      doc,
+    );
   });
 }
 
@@ -31,14 +35,11 @@ db.on('error', (err) => {
 });
 
 exports.connect = () => {
-  mongoose.connect(
-    mongoUri,
-    {
-      keepAlive: 1,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-  );
+  mongoose.connect(mongoUri, {
+    keepAlive: 1,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
   return db;
 };

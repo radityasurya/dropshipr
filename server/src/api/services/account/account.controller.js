@@ -13,7 +13,9 @@ const accountSchema = Joi.object({
 
 const create = async (req, res) => {
   const account = req.body;
-  const { error, value } = await accountSchema.validate(account, { abortEarly: false });
+  const { error, value } = await accountSchema.validate(account, {
+    abortEarly: false,
+  });
 
   if (error) {
     return res.status(httpStatus.BAD_REQUEST).json({

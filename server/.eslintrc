@@ -1,21 +1,40 @@
 {
-  "extends": "airbnb",
-  "plugins": [
-    "jsx-a11y",
-    "import"
-  ],
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "plugins": ["jsx-a11y", "import"],
   "rules": {
-    "linebreak-style": [
-      "error",
-      "windows"
+    "jsx-a11y/href-no-hash": ["off"],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".js", ".jsx"]
+      }
     ],
+    "max-len": [
+      "warn",
+      {
+        "code": "80",
+        "tabWidth": 2,
+        "comments": "80",
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "linebreak-style": ["error", "windows"],
     "no-console": "off",
     "no-undef": "off",
     "no-unused-vars": "off",
     "no-global-assign": "off"
   },
   "env": {
+    "browser": true,
+    "commonjs": true,
     "es6": true,
+    "jest": true,
+    "node": true,
     "mocha": true
   },
   "settings": {

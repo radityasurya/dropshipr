@@ -15,12 +15,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => res.send(
-  JSON.stringify({
-    name: 'Dropshipr API',
-    version: config.version,
-  }),
-));
+app.get('/', (req, res) =>
+  res.send(
+    JSON.stringify({
+      name: 'Dropshipr API',
+      version: config.version,
+    }),
+  ),
+);
 
 app.use('/api', routes);
 

@@ -14,9 +14,7 @@ const envVarsSchema = Joi.object({
     then: Joi.boolean().default(true),
     otherwise: Joi.boolean().default(false),
   }),
-  MONGO_HOST: Joi.string()
-    .required()
-    .description('Mongo DB host url'),
+  MONGO_HOST: Joi.string().required().description('Mongo DB host url'),
   MONGO_PORT: Joi.number().default(27017),
 })
   .unknown()
