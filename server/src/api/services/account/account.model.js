@@ -22,12 +22,10 @@ const AccountSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    type: [
-      {
-        type: String,
-        enum: TYPES,
-      },
-    ],
+    type: {
+      type: String,
+      enum: TYPES,
+    },
     phone: String,
   },
   {

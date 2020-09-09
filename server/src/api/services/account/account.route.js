@@ -12,13 +12,10 @@ router
   .get(asyncHandler(account.findAll))
   .post(asyncHandler(account.create));
 
-router.route('/test').get(
-  asyncHandler(async (req, res, next) => {
-    res.status(httpStatus.OK).send({
-      message: 'List of accounts',
-      password: base64.encode('asdewq123'),
-    });
-  }),
-);
+router
+  .route('/:id')
+  .get(asyncHandler(account.get))
+  .put(asyncHandler(account.update))
+  .delete(asyncHandler(account.remove));
 
 module.exports = router;

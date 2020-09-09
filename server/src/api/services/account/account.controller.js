@@ -1,8 +1,8 @@
 const base64 = require('js-base64');
 const httpStatus = require('http-status');
 const Joi = require('joi');
+const { json } = require('body-parser');
 
-const scraper = require('../../utils/scraper');
 const Account = require('./account.model');
 
 const accountSchema = Joi.object({
@@ -22,28 +22,65 @@ const create = async (req, res) => {
   if (error) {
     return res.status(httpStatus.BAD_REQUEST).json({
       message: 'Invalid account data',
+      status: httpStatus.BAD_REQUEST,
     });
   }
 
-  value.password = base64.encode(req.body.password);
+  value.password = base64.encode(value.password);
 
-  const createdAccount = new Account(value).save();
-  delete createdAccount.password;
+  const createdAccount = new Account(value);
+  await createdAccount.save();
+
+  // delete createdAccount.password;
+  createdAccount.password = undefined;
 
   return res.json(createdAccount);
 };
 
 const findAll = async (req, res) => {
-  const scraped = await scraper.scrapeShopee();
+  const accounts = await Account.find({});
 
-  return res.json({
-    message: 'List of accounts',
-    password: base64.encode('asdewq123'),
-    result: scraped,
+  try {
+    return res.json(accounts);
+  } catch (err) {
+    return res.status(httpStatus.BAD_GATEWAY).send(err);
+  }
+};
+
+const get = async (req, res) => {
+  try {
+    const account = await Account.findById(req.params.id).exec();
+
+    return res.status(httpStatus.OK).send(account);
+  } catch (err) {
+    return res.status(httpStatus.NOT_FOUND).send({
+      message: 'Account not found',
+    });
+  }
+};
+
+const update = async (req, res) => {
+  const account = await Account.findByIdAndUpdate(req.params.id, req.body);
+  await account.save();
+
+  return res.status(httpStatus.OK).send(account);
+};
+
+const remove = async (req, res) => {
+  console.log(req.params.id);
+  const account = await Account.findByIdAndDelete(req.params.id);
+
+  if (!account) res.status(httpStatus.NOT_FOUND).send('No account found!');
+
+  return res.status(httpStatus.OK).send({
+    message: 'Account is successfully removed!',
   });
 };
 
 module.exports = {
-  create,
   findAll,
+  create,
+  get,
+  update,
+  remove,
 };
