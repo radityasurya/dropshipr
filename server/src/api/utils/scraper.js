@@ -2,16 +2,15 @@ const puppeteer = require('puppeteer');
 
 const scrapeShopee = async () => {
   const browser = await puppeteer.launch(
-    { headless: false },
+    { headless: true },
     { devtools: true },
   );
   const page = await browser.newPage();
-  page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
   await page.goto('https://shopee.co.id/');
   await page.waitForSelector('div.shopee-popup__close-btn');
   await page.click('div.shopee-popup__close-btn');
 
-  await page.waitFor(60);
+  await page.waitForSelector('div.shopee-header-section__header__title');
 
   const scrapedData = await page.evaluate(() => {
     debugger;
