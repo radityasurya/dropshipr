@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PROVIDER = ['GMAIL', 'TOKOPEDIA', 'SHOPEE', 'BUKALAPAK'];
+const TYPES = ['GMAIL', 'TOKOPEDIA', 'SHOPEE', 'BUKALAPAK'];
 
 const AccountSchema = new mongoose.Schema(
   {
@@ -22,10 +22,10 @@ const AccountSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    provider: [
+    type: [
       {
         type: String,
-        enum: ROLES,
+        enum: TYPES,
       },
     ],
     phone: String,

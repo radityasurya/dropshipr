@@ -1,14 +1,16 @@
 const base64 = require('js-base64');
 const httpStatus = require('http-status');
+const Joi = require('joi');
 
+const scraper = require('../../utils/scraper');
 const Account = require('./account.model');
 
 const accountSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email(),
   password: Joi.string().min(4).required(),
-  provider: Joi.string(),
-  phone: Joi.string().phone(),
+  type: Joi.string(),
+  phone: Joi.string(),
 });
 
 const create = async (req, res) => {
@@ -29,4 +31,19 @@ const create = async (req, res) => {
   delete createdAccount.password;
 
   return res.json(createdAccount);
+};
+
+const findAll = async (req, res) => {
+  const scraped = await scraper.scrapeShopee();
+
+  return res.json({
+    message: 'List of accounts',
+    password: base64.encode('asdewq123'),
+    result: scraped,
+  });
+};
+
+module.exports = {
+  create,
+  findAll,
 };
