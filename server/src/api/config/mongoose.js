@@ -37,6 +37,7 @@ db.on('error', (err) => {
 exports.connect = () => {
   mongoose.connect(mongoUri, {
     keepAlive: 1,
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
