@@ -20,9 +20,6 @@ app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 
-// request logging. dev: console | production: file
-// app.use(morgan('combined'));
-
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
