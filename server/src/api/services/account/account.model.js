@@ -1,16 +1,27 @@
 const mongoose = require('mongoose');
 
-const TYPES = ['GMAIL', 'TOKOPEDIA', 'SHOPEE', 'BUKALAPAK'];
+const MARKETPLACE_TYPES = ['TOKOPEDIA', 'SHOPEE', 'BUKALAPAK'];
 
 const AccountSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
     },
-    email: {
+    password: {
       type: String,
       required: true,
+    },
+    marketplace: {
+      type: String,
+      enum: MARKETPLACE_TYPES,
+      required: true,
+    },
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
       unique: true,
       match: [
         // eslint-disable-next-line no-useless-escape
@@ -18,15 +29,11 @@ const AccountSchema = new mongoose.Schema(
         'Please enter a valid email',
       ],
     },
-    password: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      enum: TYPES,
-    },
     phone: String,
+    bank: String,
+    totalProducts: Number,
+    pin: String,
+    category: String,
   },
   {
     timestamps: { createdAt: 'created_at' },

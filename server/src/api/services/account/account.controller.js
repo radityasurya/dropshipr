@@ -6,11 +6,16 @@ const { json } = require('body-parser');
 const Account = require('./account.model');
 
 const accountSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().email(),
+  username: Joi.string().required(),
   password: Joi.string().min(4).required(),
-  type: Joi.string(),
+  marketplace: Joi.string().required(),
+  name: Joi.string(),
+  email: Joi.string().email(),
   phone: Joi.string(),
+  bank: Joi.string(),
+  totalProducts: Joi.number().integer(),
+  pin: Joi.string(),
+  category: Joi.string(),
 });
 
 const create = async (req, res) => {
@@ -20,13 +25,17 @@ const create = async (req, res) => {
   });
 
   if (error) {
+    console.log(error);
     return res.status(httpStatus.BAD_REQUEST).json({
       message: 'Invalid account data',
       status: httpStatus.BAD_REQUEST,
+      error,
     });
   }
 
   value.password = base64.encode(value.password);
+  value.totalProducts = 0;
+  value.pin = '123456';
 
   const createdAccount = new Account(value);
   await createdAccount.save();
