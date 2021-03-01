@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 const scrapeShopee = async () => {
   const browser = await puppeteer.launch(
