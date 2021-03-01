@@ -12,7 +12,8 @@ mongoose.connect();
 if (!module.parent) {
   // listen on port config.port
   app.listen(config.port, () => {
-    console.info( // eslint-disable-line no-console
+    console.info(
+      // eslint-disable-line no-console
       `Dropshipr server started on port: ${config.port} (${config.env})`,
     );
   });
