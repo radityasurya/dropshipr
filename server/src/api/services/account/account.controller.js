@@ -1,6 +1,11 @@
+const mongoose = require('mongoose');
 const base64 = require('js-base64');
 const httpStatus = require('http-status');
 const Joi = require('joi');
+const csv = require('fast-csv');
+const path = require('path');
+const fs = require('fs');
+
 const { json } = require('body-parser');
 
 const Account = require('./account.model');
@@ -86,10 +91,47 @@ const remove = async (req, res) => {
   });
 };
 
+const upload = (req, res) => {
+  const dirUpload = path.join(process.cwd(), '/uploads');
+  const csvFilePath = path.join(dirUpload, req.file.filename);
+  console.log(csvFilePath);
+  const stream = fs.createReadStream(csvFilePath);
+  const accounts = [];
+  const csvStream = csv
+    .parseStream(stream, { headers: true })
+    .on('error', (err) => {
+      res.status(httpStatus.BAD_GATEWAY).send({
+        message: 'Failed parsing stream',
+        err,
+      });
+    })
+    .on('data', (data) => {
+      accounts.push(data);
+    })
+    .on('end', (rowCount) => {
+      console.log(`Parsed ${rowCount} rows`);
+      console.log(`File path: ${csvFilePath}`);
+
+      Account.insertMany(accounts)
+        .then((data) => {
+          console.log(`Data inserted!`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      res.status(httpStatus.OK).send({
+        message: 'Account successfully added',
+        accounts,
+      });
+    });
+};
+
 module.exports = {
   findAll,
   create,
   get,
   update,
   remove,
+  upload,
 };
